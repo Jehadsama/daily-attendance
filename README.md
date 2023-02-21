@@ -2,6 +2,8 @@
 
 ## project
 
+Automatic sign-in daily for multi platforms
+
 ### cron
 
 test:
