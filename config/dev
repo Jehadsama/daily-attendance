@@ -1,5 +1,14 @@
 # cron
-CRON_INTERVAL="*/1 * * * * *"
+cronInterval="*/1 * * * * *"
 
 # v2free
-V2FREE_HOST=https://w1.v2free.net/user/checkin
+v2freeHost="https://w1.v2free.net"
+v2freeCheckin="/user/checkin"
+
+
+# juejin
+juejinHost="https://api.juejin.cn"
+juejinGetTodayStatus="/growth_api/v1/get_today_status"
+juejinCheckin="/growth_api/v1/check_in"
+juejinGetLotteryConfig="/growth_api/v1/lottery_config/get"
+juejinDrawLottery="/growth_api/v1/lottery/draw"

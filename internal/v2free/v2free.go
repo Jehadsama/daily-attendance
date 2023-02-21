@@ -6,7 +6,7 @@ import (
 	utils "github.com/Jehadsama/daily-attendance/internal/utils"
 )
 
-var url string = os.Getenv("V2FREE_HOST")
+var url string = os.Getenv("v2freeHost") + os.Getenv("v2freeCheckin")
 var CK string = utils.ReadFile("./v2freeCk")
 
 type V2freeRes struct {

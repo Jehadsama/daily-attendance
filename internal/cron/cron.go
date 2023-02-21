@@ -7,7 +7,7 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
-var crontab string = os.Getenv("CRON_INTERVAL")
+var crontab string = os.Getenv("cronInterval")
 
 var c = cron.New(cron.WithSeconds())
 
