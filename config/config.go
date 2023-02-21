@@ -4,18 +4,17 @@ import (
 	"log"
 	"os"
 
+	"github.com/Jehadsama/daily-attendance/internal/utils"
 	"github.com/joho/godotenv"
 )
 
 func init() {
-	dirname, _ := os.Getwd()
 	env := os.Getenv("DAILY_ENV")
 	if env == "" {
 		env = "dev"
 	}
 	log.Println("env:", env)
-	err := godotenv.Load(dirname + "/" + "config/" + env)
-	if err != nil {
-		log.Fatal(err)
-	}
+	dirname, _ := os.Getwd()
+	err := godotenv.Load(dirname+"/config/"+env, dirname+"/config/dev")
+	utils.CheckError(err)
 }

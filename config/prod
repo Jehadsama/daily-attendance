@@ -1,6 +1,2 @@
 # cron
 CRON_INTERVAL="0 5 * * *"
-
-# v2free
-V2FREE_HOST=https://w1.v2free.net/user/checkin
-
