@@ -12,7 +12,7 @@ import (
 var url string = os.Getenv("V2FREE_HOST")
 var CK string = utils.ReadFile("./v2freeCk")
 
-type Result struct {
+type V2freeRes struct {
 	Ret int    `json:"ret"`
 	Msg string `json:"msg"`
 }
@@ -31,7 +31,7 @@ func SignIn() string {
 	body, err := io.ReadAll(res.Body)
 	utils.CheckError(err)
 
-	result := &Result{}
+	result := &V2freeRes{}
 	err = json.Unmarshal(body, result)
 	utils.CheckError(err)
 
