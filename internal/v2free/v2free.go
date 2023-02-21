@@ -14,12 +14,11 @@ type V2freeRes struct {
 	Msg string `json:"msg"`
 }
 
-func (result *V2freeRes) Response() string {
-	var msg string = "v2free sign in failed"
+func (result *V2freeRes) Response() (msg string) {
 	if result.Ret == 1 {
-		msg = "v2free sign in successfully"
+		return "v2free sign in successfully"
 	}
-	return msg
+	return "v2free sign in failed"
 }
 
 func SignIn() string {
