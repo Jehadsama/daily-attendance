@@ -20,4 +20,10 @@ go run cmd/main.go cmd
 
 1. go version
 
-2. v2freeCk exists in the project root directory which has my v2free cookie string
+2. *Ck exists in the project root directory which has cookie string
+
+## todo
+
+1. mail
+2. error handle
+3. cron
