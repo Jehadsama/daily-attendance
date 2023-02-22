@@ -23,11 +23,11 @@ func ReadFile(filepath string) string {
 	return string(content)
 }
 
-type Result interface {
-	Response() string
+type Responser interface {
+	ReturnResponse() interface{}
 }
 
-func Request(method string, url string, cookie string, result Result) (string, error) {
+func Request(method string, url string, cookie string, response Responser) interface{} {
 	var req *http.Request
 	req, err := http.NewRequest(method, url, nil)
 	CheckError(err)
@@ -37,8 +37,7 @@ func Request(method string, url string, cookie string, result Result) (string, e
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	CheckError(err)
-	err = json.Unmarshal(body, result)
+	err = json.Unmarshal(body, response)
 	CheckError(err)
-	return result.Response(), nil
-
+	return response.ReturnResponse()
 }
