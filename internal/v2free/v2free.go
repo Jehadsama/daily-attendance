@@ -9,7 +9,7 @@ import (
 
 var (
 	url string = os.Getenv("v2freeHost") + os.Getenv("v2freeCheckin")
-	CK  string = utils.ReadFile("./v2freeCk")
+	CK  string = utils.ReadFile("v2freeCk")
 )
 
 type V2freeRes struct {
@@ -26,5 +26,5 @@ func (res *V2freeRes) ReturnResponse() (data interface{}) {
 
 func SignIn() {
 	msg := utils.Request("POST", url, CK, &V2freeRes{})
-	fmt.Print(msg.(string))
+	fmt.Println(msg.(string))
 }

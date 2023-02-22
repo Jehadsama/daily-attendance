@@ -8,9 +8,10 @@ import (
 )
 
 var (
-	checkIn     string = os.Getenv("juejinHost") + os.Getenv("juejinCheckin")
-	drawLottery string = os.Getenv("juejinHost") + os.Getenv("juejinDrawLottery")
-	CK          string = utils.ReadFile("./juejinCk")
+	checkIn          string = os.Getenv("juejinHost") + os.Getenv("juejinCheckin")
+	getLotteryConfig string = os.Getenv("juejinHost") + os.Getenv("juejinGetLotteryConfig")
+	drawLottery      string = os.Getenv("juejinHost") + os.Getenv("juejinDrawLottery")
+	CK               string = utils.ReadFile("juejinCk")
 )
 
 type resp struct {
@@ -61,24 +62,55 @@ func (res *drawLotteryRes) ReturnResponse() interface{} {
 	return r
 }
 
+type lotteryConfigRes struct {
+	Err
+	Data struct {
+		Lottery    interface{}
+		Free_count int
+		point_cost int
+	}
+}
+
+func (res *lotteryConfigRes) ReturnResponse() interface{} {
+	r := &resp{
+		Success: false,
+	}
+	if res.Err_no == 0 && res.Data.Free_count > 0 {
+		r.Success = true
+	}
+	return r
+}
+
 // 签到
 func CheckIn() {
 	result := utils.Request("POST", checkIn, CK, &checkInRes{})
 	res := result.(*resp)
 	if res.Success {
-		fmt.Print("签到成功")
+		fmt.Println("juejin sign in successfully")
 	} else {
-		fmt.Println("签到失败:", res.Data)
+		fmt.Println("juejin sign in failied:", res.Data)
 	}
+}
+
+// 获取今日免费抽奖次数
+func GetLotteryConfig() bool {
+	result := utils.Request("GET", getLotteryConfig, CK, &lotteryConfigRes{})
+	res := result.(*resp)
+	return res.Success
 }
 
 // 抽奖
 func DrawLottery() {
+	ok := GetLotteryConfig()
+	if !ok {
+		fmt.Println("no free lottery")
+		return
+	}
 	result := utils.Request("POST", drawLottery, CK, &drawLotteryRes{})
 	res := result.(*resp)
 	if res.Success {
-		fmt.Println("抽奖成功")
+		fmt.Println("juejin draw lottery successfully")
 	} else {
-		fmt.Println("免费抽奖失败:", res.Data)
+		fmt.Println("juejin draw lottery failed:", res.Data)
 	}
 }
