@@ -1,7 +1,6 @@
 package cron
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/robfig/cron/v3"
@@ -11,11 +10,10 @@ var crontab string = os.Getenv("cronInterval")
 
 var c = cron.New(cron.WithSeconds())
 
-func Run(f func() string) {
+func Run(f func()) {
 
 	c.AddFunc(crontab, func() {
-		r := f()
-		fmt.Println(r)
+		f()
 	})
 
 	c.Start()

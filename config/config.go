@@ -16,5 +16,5 @@ func init() {
 	log.Println("env:", env)
 	dirname, _ := os.Getwd()
 	err := godotenv.Load(dirname+"/config/"+env, dirname+"/config/dev")
-	utils.CheckError(err)
+	utils.CheckError("config,init", err)
 }
