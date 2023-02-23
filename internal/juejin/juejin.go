@@ -25,7 +25,7 @@ type checkInRes struct {
 }
 
 func (res *checkInRes) ReturnResponse() bool {
-	return res.Err_no > 0
+	return res.Err_no == 0
 }
 
 type drawLotteryRes struct {
@@ -38,7 +38,7 @@ type drawLotteryRes struct {
 }
 
 func (res *drawLotteryRes) ReturnResponse() bool {
-	return res.Err_no > 0
+	return res.Err_no == 0
 }
 
 type lotteryConfigRes struct {
@@ -71,6 +71,7 @@ func GetLotteryConfig() bool {
 
 // 抽奖
 func DrawLottery() {
+	CheckIn()
 	ok := GetLotteryConfig()
 	if !ok {
 		fmt.Println("【juejin draw lottery】no free lottery")

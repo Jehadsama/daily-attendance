@@ -10,7 +10,6 @@ import (
 
 var funcsMap = map[string]func(){
 	"v2free.SignIn":      v2free.SignIn,
-	"juejin.CheckIn":     juejin.CheckIn,
 	"juejin.DrawLottery": juejin.DrawLottery,
 }
 
