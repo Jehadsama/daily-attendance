@@ -17,14 +17,15 @@ type V2freeRes struct {
 	Msg string `json:"msg"`
 }
 
-func (res *V2freeRes) ReturnResponse() (data interface{}) {
-	if res.Ret == 1 {
-		return "v2free sign in successfully"
-	}
-	return "v2free sign in failed"
+func (res *V2freeRes) ReturnResponse() bool {
+	return res.Ret == 1
 }
 
 func SignIn() {
-	msg := utils.Request("POST", url, CK, &V2freeRes{})
-	fmt.Println(msg.(string))
+	ok := utils.Request("POST", url, CK, &V2freeRes{})
+	msg := "【v2free sign in】failed"
+	if ok {
+		msg = "【v2free sign in】successfully"
+	}
+	fmt.Println(msg)
 }

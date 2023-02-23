@@ -2,14 +2,11 @@ package main
 
 import (
 	"log"
-	"sync"
 
 	_ "github.com/Jehadsama/daily-attendance/config"
 	"github.com/Jehadsama/daily-attendance/internal/juejin"
 	"github.com/Jehadsama/daily-attendance/internal/v2free"
 )
-
-var wg sync.WaitGroup
 
 var funcsMap = map[string]func(){
 	"v2free.SignIn":      v2free.SignIn,
@@ -34,14 +31,9 @@ func main() {
 
 	log.Println("main,start")
 	for name, f := range funcsMap {
-		wg.Add(1)
-		go func(funcName string, fun func()) {
-			log.Println(funcName, "start")
-			defer wg.Done()
-			fun()
-			log.Println(funcName, "end")
-		}(name, f)
+		log.Println(name, "start")
+		f()
+		log.Println(name, "end")
 	}
-	wg.Wait()
 	log.Println("main,end")
 }

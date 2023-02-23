@@ -14,11 +14,6 @@ var (
 	CK               string = utils.ReadFile("juejinCk")
 )
 
-type resp struct {
-	Success bool
-	Data    string
-}
-
 type Err struct {
 	Err_no  int
 	Err_msg string
@@ -29,16 +24,8 @@ type checkInRes struct {
 	Data bool
 }
 
-func (res *checkInRes) ReturnResponse() interface{} {
-	r := &resp{
-		Success: true,
-		Data:    "",
-	}
-	if res.Err_no > 0 {
-		r.Success = false
-		r.Data = res.Err_msg
-	}
-	return r
+func (res *checkInRes) ReturnResponse() bool {
+	return res.Err_no > 0
 }
 
 type drawLotteryRes struct {
@@ -50,16 +37,8 @@ type drawLotteryRes struct {
 	}
 }
 
-func (res *drawLotteryRes) ReturnResponse() interface{} {
-	r := &resp{
-		Success: true,
-		Data:    fmt.Sprintf("免费抽奖成功,奖品:%v,增加幸运值:%v,总幸运值:%v", res.Data.Lottery_name, res.Data.Draw_lucky_value, res.Data.Total_lucky_value),
-	}
-	if res.Err_no > 0 {
-		r.Success = false
-		r.Data = res.Err_msg
-	}
-	return r
+func (res *drawLotteryRes) ReturnResponse() bool {
+	return res.Err_no > 0
 }
 
 type lotteryConfigRes struct {
@@ -71,46 +50,36 @@ type lotteryConfigRes struct {
 	}
 }
 
-func (res *lotteryConfigRes) ReturnResponse() interface{} {
-	r := &resp{
-		Success: false,
-	}
-	if res.Err_no == 0 && res.Data.Free_count > 0 {
-		r.Success = true
-	}
-	return r
+func (res *lotteryConfigRes) ReturnResponse() bool {
+	return (res.Err_no == 0 && res.Data.Free_count > 0)
 }
 
 // 签到
 func CheckIn() {
-	result := utils.Request("POST", checkIn, CK, &checkInRes{})
-	res := result.(*resp)
-	if res.Success {
-		fmt.Println("juejin sign in successfully")
+	ok := utils.Request("POST", checkIn, CK, &checkInRes{})
+	if ok {
+		fmt.Println("【juejin sign in】successfully")
 	} else {
-		fmt.Println("juejin sign in failied:", res.Data)
+		fmt.Println("【juejin sign in failied】")
 	}
 }
 
 // 获取今日免费抽奖次数
 func GetLotteryConfig() bool {
-	result := utils.Request("GET", getLotteryConfig, CK, &lotteryConfigRes{})
-	res := result.(*resp)
-	return res.Success
+	return utils.Request("GET", getLotteryConfig, CK, &lotteryConfigRes{})
 }
 
 // 抽奖
 func DrawLottery() {
 	ok := GetLotteryConfig()
 	if !ok {
-		fmt.Println("no free lottery")
+		fmt.Println("【juejin draw lottery】no free lottery")
 		return
 	}
-	result := utils.Request("POST", drawLottery, CK, &drawLotteryRes{})
-	res := result.(*resp)
-	if res.Success {
-		fmt.Println("juejin draw lottery successfully")
+	ok = utils.Request("POST", drawLottery, CK, &drawLotteryRes{})
+	if ok {
+		fmt.Println("【juejin draw lottery】successfully")
 	} else {
-		fmt.Println("juejin draw lottery failed:", res.Data)
+		fmt.Println("【juejin draw lottery】failed")
 	}
 }

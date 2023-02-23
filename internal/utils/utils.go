@@ -24,10 +24,10 @@ func ReadFile(filepath string) string {
 }
 
 type Responser interface {
-	ReturnResponse() interface{}
+	ReturnResponse() bool
 }
 
-func Request(method string, url string, cookie string, response Responser) interface{} {
+func Request(method string, url string, cookie string, response Responser) bool {
 	log.Println("utils,Request", method, url)
 	var req *http.Request
 	req, err := http.NewRequest(method, url, nil)
