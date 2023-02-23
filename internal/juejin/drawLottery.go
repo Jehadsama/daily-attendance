@@ -2,31 +2,9 @@ package juejin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/Jehadsama/daily-attendance/internal/utils"
 )
-
-var (
-	checkIn          string = os.Getenv("juejinHost") + os.Getenv("juejinCheckin")
-	getLotteryConfig string = os.Getenv("juejinHost") + os.Getenv("juejinGetLotteryConfig")
-	drawLottery      string = os.Getenv("juejinHost") + os.Getenv("juejinDrawLottery")
-	CK               string = utils.ReadFile("juejinCk")
-)
-
-type Err struct {
-	Err_no  int
-	Err_msg string
-}
-
-type checkInRes struct {
-	Err
-	Data bool
-}
-
-func (res *checkInRes) ReturnResponse() bool {
-	return res.Err_no == 0
-}
 
 type drawLotteryRes struct {
 	Err
@@ -52,16 +30,6 @@ type lotteryConfigRes struct {
 
 func (res *lotteryConfigRes) ReturnResponse() bool {
 	return (res.Err_no == 0 && res.Data.Free_count > 0)
-}
-
-// 签到
-func CheckIn() {
-	ok := utils.Request("POST", checkIn, CK, &checkInRes{})
-	if ok {
-		fmt.Println("【juejin sign in】successfully")
-	} else {
-		fmt.Println("【juejin sign in failied】")
-	}
 }
 
 // 获取今日免费抽奖次数
