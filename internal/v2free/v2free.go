@@ -17,13 +17,15 @@ type V2freeRes struct {
 	Msg string `json:"msg"`
 }
 
-func (res *V2freeRes) ReturnResponse() bool {
+func (res *V2freeRes) Success() bool {
 	return res.Ret == 1
 }
 
 func SignIn() {
-	ok := utils.Request("POST", url, CK, &V2freeRes{})
+	var res V2freeRes
+	utils.Request("POST", url, CK, nil, &res)
 	msg := "【v2free sign in】failed"
+	ok := res.Success()
 	if ok {
 		msg = "【v2free sign in】successfully"
 	}

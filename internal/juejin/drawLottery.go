@@ -15,7 +15,7 @@ type drawLotteryRes struct {
 	}
 }
 
-func (res *drawLotteryRes) ReturnResponse() bool {
+func (res *drawLotteryRes) Success() bool {
 	return res.Err_no == 0
 }
 
@@ -28,13 +28,15 @@ type lotteryConfigRes struct {
 	}
 }
 
-func (res *lotteryConfigRes) ReturnResponse() bool {
+func (res *lotteryConfigRes) Success() bool {
 	return (res.Err_no == 0 && res.Data.Free_count > 0)
 }
 
 // 获取今日免费抽奖次数
 func GetLotteryConfig() bool {
-	return utils.Request("GET", getLotteryConfig, CK, &lotteryConfigRes{})
+	var res lotteryConfigRes
+	utils.Request("GET", getLotteryConfig, CK, nil, &res)
+	return res.Success()
 }
 
 // 抽奖
@@ -45,7 +47,9 @@ func DrawLottery() {
 		fmt.Println("【juejin draw lottery】no free lottery")
 		return
 	}
-	ok = utils.Request("POST", drawLottery, CK, &drawLotteryRes{})
+	var res drawLotteryRes
+	utils.Request("POST", drawLottery, CK, nil, &res)
+	ok = res.Success()
 	if ok {
 		fmt.Println("【juejin draw lottery】successfully")
 	} else {

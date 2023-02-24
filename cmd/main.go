@@ -11,6 +11,7 @@ import (
 var funcsMap = map[string]func(){
 	"v2free.SignIn":      v2free.SignIn,
 	"juejin.DrawLottery": juejin.DrawLottery,
+	"juejin.DipLucky":    juejin.DipLucky,
 }
 
 func main() {

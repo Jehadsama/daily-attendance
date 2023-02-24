@@ -10,6 +10,7 @@ import (
 
 func CheckError(msg string, err error) {
 	if err != nil {
+		println("===========", 1111111, "==========")
 		log.Fatal(msg, err)
 		panic(err)
 	}
@@ -24,13 +25,13 @@ func ReadFile(filepath string) string {
 }
 
 type Responser interface {
-	ReturnResponse() bool
+	Success() bool
 }
 
-func Request(method string, url string, cookie string, response Responser) bool {
+func Request(method string, url string, cookie string, data io.Reader, response Responser) {
 	log.Println("utils,Request", method, url)
 	var req *http.Request
-	req, err := http.NewRequest(method, url, nil)
+	req, err := http.NewRequest(method, url, data)
 	CheckError("utils,Request,NewRequest", err)
 	req.Header.Set("Cookie", cookie)
 	resp, err := http.DefaultClient.Do(req)
@@ -40,5 +41,4 @@ func Request(method string, url string, cookie string, response Responser) bool 
 	CheckError("utils,Request,ReadAll", err)
 	err = json.Unmarshal(body, response)
 	CheckError("utils,Request,Unmarshal", err)
-	return response.ReturnResponse()
 }

@@ -11,13 +11,15 @@ type checkInRes struct {
 	Data bool
 }
 
-func (res *checkInRes) ReturnResponse() bool {
+func (res *checkInRes) Success() bool {
 	return res.Err_no == 0
 }
 
 // 签到
 func CheckIn() {
-	ok := utils.Request("POST", checkIn, CK, &checkInRes{})
+	var res checkInRes
+	utils.Request("POST", checkIn, CK, nil, &res)
+	ok := res.Success()
 	if ok {
 		fmt.Println("【juejin sign in】successfully")
 	} else {
