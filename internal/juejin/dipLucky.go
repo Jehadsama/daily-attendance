@@ -39,15 +39,12 @@ func GetLuckyUserList() string {
 
 func DipLucky() {
 	historyId := GetLuckyUserList()
-
 	var res dipLuckyRes
 	utils.Request("POST", dipLucky, CK, strings.NewReader("{\"History_id\":"+historyId+"}"), &res)
-
 	ok := res.Success()
 	if ok {
 		fmt.Println("【juejin dip lucky】successfully")
 	} else {
 		fmt.Println("【juejin dip lucky】failied")
 	}
-
 }
