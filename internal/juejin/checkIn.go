@@ -8,7 +8,6 @@ import (
 
 type checkInRes struct {
 	Err
-	Data bool
 }
 
 func (res *checkInRes) Success() bool {

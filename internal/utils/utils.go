@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -10,7 +11,6 @@ import (
 
 func CheckError(msg string, err error) {
 	if err != nil {
-		println("===========", 1111111, "==========")
 		log.Fatal(msg, err)
 		panic(err)
 	}
@@ -40,5 +40,6 @@ func Request(method string, url string, cookie string, data io.Reader, response 
 	body, err := io.ReadAll(resp.Body)
 	CheckError("utils,Request,ReadAll", err)
 	err = json.Unmarshal(body, response)
+	fmt.Printf("======\n%#v\n=========\n", response)
 	CheckError("utils,Request,Unmarshal", err)
 }
