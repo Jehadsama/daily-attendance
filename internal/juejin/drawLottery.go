@@ -1,7 +1,7 @@
 package juejin
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/Jehadsama/daily-attendance/internal/utils"
 )
@@ -44,15 +44,15 @@ func DrawLottery() {
 	CheckIn()
 	ok := GetLotteryConfig()
 	if !ok {
-		fmt.Println("【juejin draw lottery】no free lottery")
+		log.Println("【juejin draw lottery】no free lottery")
 		return
 	}
 	var res drawLotteryRes
 	utils.Request("POST", drawLottery, CK, nil, &res)
 	ok = res.Success()
 	if ok {
-		fmt.Println("【juejin draw lottery】successfully")
+		log.Println("【juejin draw lottery】successfully")
 	} else {
-		fmt.Println("【juejin draw lottery】failed")
+		log.Println("【juejin draw lottery】failed")
 	}
 }

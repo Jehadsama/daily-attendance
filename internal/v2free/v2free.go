@@ -1,7 +1,7 @@
 package v2free
 
 import (
-	"fmt"
+	"log"
 	"os"
 
 	utils "github.com/Jehadsama/daily-attendance/internal/utils"
@@ -29,5 +29,5 @@ func SignIn() {
 	if ok {
 		msg = "【v2free sign in】successfully"
 	}
-	fmt.Println(msg)
+	log.Println(msg)
 }

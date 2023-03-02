@@ -1,7 +1,7 @@
 package juejin
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/Jehadsama/daily-attendance/internal/utils"
 )
@@ -20,8 +20,8 @@ func CheckIn() {
 	utils.Request("POST", checkIn, CK, nil, &res)
 	ok := res.Success()
 	if ok {
-		fmt.Println("【juejin sign in】successfully")
+		log.Println("【juejin sign in】successfully")
 	} else {
-		fmt.Println("【juejin sign in】failied")
+		log.Println("【juejin sign in】failied")
 	}
 }

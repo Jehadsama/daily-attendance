@@ -1,7 +1,7 @@
 package juejin
 
 import (
-	"fmt"
+	"log"
 	"strings"
 
 	"github.com/Jehadsama/daily-attendance/internal/utils"
@@ -43,8 +43,8 @@ func DipLucky() {
 	utils.Request("POST", dipLucky, CK, strings.NewReader("{\"History_id\":"+historyId+"}"), &res)
 	ok := res.Success()
 	if ok {
-		fmt.Println("【juejin dip lucky】successfully")
+		log.Println("【juejin dip lucky】successfully")
 	} else {
-		fmt.Println("【juejin dip lucky】failied")
+		log.Println("【juejin dip lucky】failied")
 	}
 }
