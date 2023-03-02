@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -40,6 +39,6 @@ func Request(method string, url string, cookie string, data io.Reader, response 
 	body, err := io.ReadAll(resp.Body)
 	CheckError("utils,Request,ReadAll", err)
 	err = json.Unmarshal(body, response)
-	fmt.Printf("======\n%#v\n=========\n", response)
+	log.Printf("\n\n%#v\n\n", response)
 	CheckError("utils,Request,Unmarshal", err)
 }
