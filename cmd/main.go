@@ -8,7 +8,7 @@ import (
 	"github.com/Jehadsama/daily-attendance/internal/v2free"
 )
 
-var funcsMap = map[string]func(){
+var funcsMap = map[string]func() string{
 	"v2free.SignIn":      v2free.SignIn,
 	"juejin.DrawLottery": juejin.DrawLottery,
 	"juejin.DipLucky":    juejin.DipLucky,
@@ -29,11 +29,10 @@ func main() {
 	// 	cron.Run(v2free.SignIn)
 	// }
 
-	log.Println("main,start")
 	for name, f := range funcsMap {
 		log.Println(name, "start")
 		f()
 		log.Println(name, "end")
 	}
-	log.Println("main,end")
+
 }

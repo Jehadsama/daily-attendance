@@ -1,8 +1,6 @@
 package juejin
 
 import (
-	"log"
-
 	"github.com/Jehadsama/daily-attendance/internal/utils"
 )
 
@@ -40,19 +38,18 @@ func GetLotteryConfig() bool {
 }
 
 // 抽奖
-func DrawLottery() {
+func DrawLottery() string {
 	CheckIn()
 	ok := GetLotteryConfig()
 	if !ok {
-		log.Println("【juejin draw lottery】no free lottery")
-		return
+		return "【juejin draw lottery】no free lottery"
 	}
 	var res drawLotteryRes
 	utils.Request("POST", drawLottery, CK, nil, &res)
 	ok = res.Success()
 	if ok {
-		log.Println("【juejin draw lottery】successfully")
+		return "【juejin draw lottery】successfully"
 	} else {
-		log.Println("【juejin draw lottery】failed")
+		return "【juejin draw lottery】failed"
 	}
 }

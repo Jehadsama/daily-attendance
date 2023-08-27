@@ -1,7 +1,6 @@
 package v2free
 
 import (
-	"log"
 	"os"
 
 	utils "github.com/Jehadsama/daily-attendance/internal/utils"
@@ -21,13 +20,13 @@ func (res *V2freeRes) Success() bool {
 	return res.Ret == 1
 }
 
-func SignIn() {
+func SignIn() string {
 	var res V2freeRes
 	utils.Request("POST", url, CK, nil, &res)
 	msg := "【v2free sign in】failed"
 	ok := res.Success()
 	if ok {
-		msg = "【v2free sign in】successfully"
+		return "【v2free sign in】successfully"
 	}
-	log.Println(msg)
+	return msg
 }

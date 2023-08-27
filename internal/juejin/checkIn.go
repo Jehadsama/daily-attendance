@@ -1,8 +1,6 @@
 package juejin
 
 import (
-	"log"
-
 	"github.com/Jehadsama/daily-attendance/internal/utils"
 )
 
@@ -15,13 +13,13 @@ func (res *checkInRes) Success() bool {
 }
 
 // 签到
-func CheckIn() {
+func CheckIn() string {
 	var res checkInRes
 	utils.Request("POST", checkIn, CK, nil, &res)
 	ok := res.Success()
 	if ok {
-		log.Println("【juejin sign in】successfully")
+		return "【juejin sign in】successfully"
 	} else {
-		log.Println("【juejin sign in】failied")
+		return "【juejin sign in】failied"
 	}
 }

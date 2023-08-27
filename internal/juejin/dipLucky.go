@@ -1,7 +1,6 @@
 package juejin
 
 import (
-	"log"
 	"strings"
 
 	"github.com/Jehadsama/daily-attendance/internal/utils"
@@ -37,14 +36,14 @@ func GetLuckyUserList() string {
 	return res.Data.Lotteries[0].History_id
 }
 
-func DipLucky() {
+func DipLucky() string {
 	historyId := GetLuckyUserList()
 	var res dipLuckyRes
 	utils.Request("POST", dipLucky, CK, strings.NewReader("{\"History_id\":"+historyId+"}"), &res)
 	ok := res.Success()
 	if ok {
-		log.Println("【juejin dip lucky】successfully")
+		return "【juejin dip lucky】successfully"
 	} else {
-		log.Println("【juejin dip lucky】failied")
+		return "【juejin dip lucky】failied"
 	}
 }
