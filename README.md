@@ -12,18 +12,16 @@ go run cmd/main.go
 prod:
 DAILY_ENV=prod go run cmd/main.go
 
-### cmd
-
-go run cmd/main.go cmd
-
 ## remark
 
 1. go version
 
 2. *Ck exists in the project root directory which has cookie string
 
+3. smtpPassword exists in the project root directory which has password of email
+
 ## todo
 
-1. mail
-2. error handle
-3. cron
+- [x] mail
+- [ ] error handle
+- [x] cron

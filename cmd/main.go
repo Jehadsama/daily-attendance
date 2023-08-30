@@ -2,8 +2,11 @@ package main
 
 import (
 	"log"
+	"strings"
 
 	_ "github.com/Jehadsama/daily-attendance/config"
+	"github.com/Jehadsama/daily-attendance/internal/cron"
+	"github.com/Jehadsama/daily-attendance/internal/email"
 	"github.com/Jehadsama/daily-attendance/internal/juejin"
 	"github.com/Jehadsama/daily-attendance/internal/v2free"
 )
@@ -15,24 +18,24 @@ var funcsMap = map[string]func() string{
 }
 
 func main() {
+	cron.Run(func() {
+		log.Println("cron start")
+		messages := []string{}
+		for name, f := range funcsMap {
+			log.Println(name, "start")
+			msg := f()
+			messages = append(messages, msg)
+			log.Println(name, "end")
+		}
 
-	// if len(os.Args) > 1 {
-	// 	for _, f := range funcs {
-	// 		wg.Add(1)
-	// 		go func(fun func()) {
-	// 			defer wg.Done()
-	// 			fun()
-	// 		}(f)
-	// 	}
-	// 	wg.Wait()
-	// } else {
-	// 	cron.Run(v2free.SignIn)
-	// }
+		ed := &email.EmailData{
+			From:    "ayumijehad@qq.com",
+			To:      []string{"ayumijehad@qq.com"},
+			Subject: "daily-attendance",
+			Content: strings.Join(messages, "\n"),
+		}
 
-	for name, f := range funcsMap {
-		log.Println(name, "start")
-		f()
-		log.Println(name, "end")
-	}
-
+		ed.SendMail()
+		log.Println("main end")
+	})
 }
