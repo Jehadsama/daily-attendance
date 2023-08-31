@@ -4,13 +4,23 @@
 
 Automatic sign-in daily for multi platforms
 
-### cron
+### exec
+
+#### cmd
 
 test:
 go run cmd/main.go
 
 prod:
 DAILY_ENV=prod go run cmd/main.go
+
+#### cron
+
+test:
+go run cmd/main.go cron
+
+prod:
+DAILY_ENV=prod go run cmd/main.go cron
 
 ## remark
 
