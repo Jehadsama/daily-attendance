@@ -10,16 +10,14 @@ import (
 
 func CheckError(msg string, err error) {
 	if err != nil {
-		log.Fatal(msg, err)
+		log.Fatal(msg+": ", err)
 		panic(err)
 	}
 }
 
 func ReadFile(filepath string) string {
 	content, err := os.ReadFile(filepath)
-	if err != nil {
-		panic("read file failed!")
-	}
+	CheckError("read file failed!", err)
 	return string(content)
 }
 
@@ -39,6 +37,5 @@ func Request(method string, url string, cookie string, data io.Reader, response 
 	body, err := io.ReadAll(resp.Body)
 	CheckError("utils,Request,ReadAll", err)
 	err = json.Unmarshal(body, response)
-	log.Printf("\n\n%#v\n\n", response)
 	CheckError("utils,Request,Unmarshal", err)
 }

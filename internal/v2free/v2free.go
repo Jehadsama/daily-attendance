@@ -12,8 +12,11 @@ var (
 )
 
 type V2freeRes struct {
-	Ret int    `json:"ret"`
-	Msg string `json:"msg"`
+	Ret           int64       `json:"ret"`
+	Msg           string      `json:"msg"`
+	Unflowtraffic int64       `json:"unflowtraffic"`
+	Traffic       string      `json:"traffic"`
+	TrafficInfo   interface{} `json:"trafficInfo"`
 }
 
 func (res *V2freeRes) Success() bool {
