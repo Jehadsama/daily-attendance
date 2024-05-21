@@ -2,7 +2,7 @@
 cronInterval="*/1 * * * * *"
 
 # v2free
-v2freeHost="https://w1.v2free.top"
+v2freeHost="https://w1.v2free.cc"
 v2freeCheckin="/user/checkin"
 
 # juejin
