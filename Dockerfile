@@ -9,8 +9,8 @@ ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct \
     DAILY_ENV=dev
 
-# 移动到工作目录：/src-app
-WORKDIR /src-app
+# 移动到工作目录：/build
+WORKDIR /build
 
 # 将代码复制到容器中
 COPY . .
@@ -25,11 +25,15 @@ FROM scratch
 
 ENV DAILY_ENV=dev
 
-WORKDIR /srcgo
-COPY . ./
+COPY ./config /app/config
+COPY ./juejinCk /app
+COPY ./v2freeCk /app
+COPY ./smtpPassword /app
 
 # 从builder镜像中把/src-app/main 拷贝到当前目录
-COPY --from=builder /src-app/main /srcgo
+COPY --from=builder /build/main /app/cmd
+
+EXPOSE 9000
 
 # 需要运行的命令
-ENTRYPOINT ["/srcgo/main", "cron"]
+ENTRYPOINT ["/app/main", "cron"]
