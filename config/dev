@@ -1,5 +1,5 @@
 # cron
-cronInterval="*/1 * * * * *"
+cronInterval="*/1 * * * *"
 
 # v2free
 v2freeHost="https://w1.v2free.cc"
