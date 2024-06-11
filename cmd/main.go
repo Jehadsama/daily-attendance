@@ -8,6 +8,7 @@ import (
 	_ "github.com/Jehadsama/daily-attendance/config"
 	"github.com/Jehadsama/daily-attendance/internal/cron"
 	"github.com/Jehadsama/daily-attendance/internal/email"
+	"github.com/Jehadsama/daily-attendance/internal/healthz"
 	"github.com/Jehadsama/daily-attendance/internal/juejin"
 	"github.com/Jehadsama/daily-attendance/internal/v2free"
 )
@@ -41,7 +42,10 @@ var run = func() {
 
 func main() {
 	if len(os.Args) > 1 {
-		cron.Run(run)
+		go func() {
+			cron.Run("everyMinute", healthz.Run)
+		}()
+		cron.Run("everyDay", run)
 	} else {
 		run()
 	}

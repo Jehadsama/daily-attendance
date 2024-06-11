@@ -1,2 +1,3 @@
 # cron
-cronInterval="0 5 * * *"
+everyMinute="* * * * *"
+everyDay="0 5 * * *"
