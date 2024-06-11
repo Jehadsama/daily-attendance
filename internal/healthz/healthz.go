@@ -1,12 +1,7 @@
 package healthz
 
-import (
-	"fmt"
-	"time"
-)
-
-var loc, _ = time.LoadLocation("Asia/Shanghai")
+import "log"
 
 func Run() {
-	fmt.Println("Hello healthz,", time.Now().In(loc))
+	log.Println("healthz!")
 }
