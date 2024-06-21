@@ -10,11 +10,11 @@ import (
 	"github.com/Jehadsama/daily-attendance/internal/email"
 	"github.com/Jehadsama/daily-attendance/internal/healthz"
 	"github.com/Jehadsama/daily-attendance/internal/juejin"
-	"github.com/Jehadsama/daily-attendance/internal/v2free"
 )
 
 var funcsMap = map[string]func() string{
-	"v2free.SignIn":      v2free.SignIn,
+	// TODO: v2free增加机器人验证，后面再想想怎么处理..
+	// "v2free.SignIn":      v2free.SignIn,
 	"juejin.DrawLottery": juejin.DrawLottery,
 	"juejin.DipLucky":    juejin.DipLucky,
 }
