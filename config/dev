@@ -12,7 +12,6 @@ juejinCheckin="/growth_api/v1/check_in"
 juejinGetLotteryConfig="/growth_api/v1/lottery_config/get"
 juejinDrawLottery="/growth_api/v1/lottery/draw"
 juejinGetLuckyUserList="/growth_api/v1/lottery_history/global_big"
-juejinDipLucky="/growth_api/v1/lottery_lucky/dip_lucky"
 
 # smtp
 smtpHost="smtp.qq.com"

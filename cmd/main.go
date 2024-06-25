@@ -16,7 +16,6 @@ var funcsMap = map[string]func() string{
 	// TODO: v2free增加机器人验证，后面再想想怎么处理..
 	// "v2free.SignIn":      v2free.SignIn,
 	"juejin.DrawLottery": juejin.DrawLottery,
-	"juejin.DipLucky":    juejin.DipLucky,
 }
 
 var run = func() {

@@ -10,8 +10,6 @@ var (
 	checkIn          string = os.Getenv("juejinHost") + os.Getenv("juejinCheckin")
 	getLotteryConfig string = os.Getenv("juejinHost") + os.Getenv("juejinGetLotteryConfig")
 	drawLottery      string = os.Getenv("juejinHost") + os.Getenv("juejinDrawLottery")
-	getLuckyUserList string = os.Getenv("juejinHost") + os.Getenv("juejinGetLuckyUserList")
-	dipLucky         string = os.Getenv("juejinHost") + os.Getenv("juejinDipLucky")
 	CK               string = utils.ReadFile("juejinCk")
 )
 
